@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier write .",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "next build && next export && touch out/.nojekyll && git add -f out/ && git commit -m 'deploy to gh-pages' && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
     "@fontsource/inter": "^4.5.14",
