@@ -1,21 +1,24 @@
 {
-  "name": "tech-blog",
+  "name": "blog",
   "version": "0.1.0",
-  "private": true,
-  "homepage": "https://rovxxmjxx.github.io/tech-blog",
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier write .",
-    "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy Next.js to gh-pages\" && git subtree push --prefix out origin gh-pages"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
+  "homepage": "https://rovxxmjxx.github.io/blog",
   "dependencies": {
     "@fontsource/inter": "^4.5.14",
     "@mailchimp/mailchimp_marketing": "^3.0.58",
     "@next/bundle-analyzer": "^12.1.4",
     "@next/font": "13.0.7",
+    "@nextui-org/react": "^1.0.0-beta.11",
+    "@notionhq/client": "^2.2.3",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.8",
     "@types/node": "18.11.17",
@@ -47,8 +50,7 @@
     "sharp": "^0.28.3",
     "tailwindcss": "^3.2.4",
     "typescript": "4.9.4",
-    "unist-util-visit": "^4.0.0",
-    "yarn": "^1.22.19"
+    "unist-util-visit": "^4.0.0"
   },
   "devDependencies": {
     "@types/github-slugger": "^2.0.0",
@@ -62,13 +64,23 @@
     "file-loader": "^6.0.0",
     "gh-pages": "^4.0.0",
     "globby": "11.0.3",
-    "husky": "^6.0.0",
+    "husky": "^8.0.2",
     "inquirer": "^8.1.1",
-    "lint-staged": "^11.0.0",
+    "lint-staged": "^13.1.0",
     "next-remote-watch": "^1.0.0",
     "prettier": "^2.8.1",
     "prettier-plugin-tailwindcss": "^0.1.4",
     "socket.io": "^4.4.0",
     "socket.io-client": "^4.4.0"
+  },
+  "lint-staged": {
+    "*.+(js|jsx|ts|tsx)": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
+      "prettier --write"
+    ]
   }
 }
